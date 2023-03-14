@@ -65,7 +65,7 @@ class EliteEnemy {
 }
 AbstractAircraft <|-- EliteEnemy
 
-abstract class BaseBullet
+class BaseBullet
 {
     - power:int
     + BaseBullet(int locationX, int locationY, int speedX, int speedY, int power)
@@ -95,16 +95,19 @@ abstract class BaseSupply{
 class RecoverSupply {
     + RecoverSupply(int locationX, int locationY,
     int speedX, int speedY)
+    + effect(HeroAircraft heroAircraft):void
 }
 
 class FireSupply {
     + FireSupply(int locationX, int locationY,
     int speedX, int speedY)
+    + effect(HeroAircraft heroAircraft):void
 }
 
 class BombSupply {
     + BombSupply(int locationX, int locationY,
     int speedX, int speedY)
+    + effect(HeroAircraft heroAircraft):void
 }
 
 BaseSupply <|-- RecoverSupply
