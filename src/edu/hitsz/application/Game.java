@@ -71,8 +71,8 @@ public class Game extends JPanel {
     public Game() {
         heroAircraft = new HeroAircraft(
                 Main.WINDOW_WIDTH / 2,
-                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight() ,
-                0, 0, 100);
+                Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight(),
+                0, 0, 1000);
 
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
@@ -188,7 +188,7 @@ public class Game extends JPanel {
                                 (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05),
                                 0,
                                 5,
-                                50
+                                60
                         )
         );
     }
@@ -252,42 +252,36 @@ public class Game extends JPanel {
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
                         if(enemyAircraft.getClass().getName().equals("edu.hitsz.aircraft.EliteEnemy")) {
-                            switch ((int)(Math.random()*4)) {
-                                case 0: {
-                                    allSupply.add(
-                                            new RecoverSupply(
-                                                    enemyAircraft.getLocationX(),
-                                                    enemyAircraft.getLocationY(),
-                                                    0,
-                                                    enemyAircraft.getSpeedY()/2+1
-                                            )
-                                    );
-                                    break;
-                                }
-                                case 1: {
-                                    allSupply.add(
-                                            new FireSupply(
-                                                    enemyAircraft.getLocationX(),
-                                                    enemyAircraft.getLocationY(),
-                                                    0,
-                                                    enemyAircraft.getSpeedY()/2+1
-                                            )
-                                    );
-                                    break;
-                                }
-                                case 2: {
-                                    allSupply.add(
-                                            new BombSupply(
-                                                    enemyAircraft.getLocationX(),
-                                                    enemyAircraft.getLocationY(),
-                                                    0,
-                                                    enemyAircraft.getSpeedY()/2+1
-                                            )
-                                    );
-                                    break;
-                                }
-                                default: ;
+                            int flag = (int) (Math.random() * 10);
+                            if (flag < 3) {
+                                allSupply.add(
+                                        new RecoverSupply(
+                                                enemyAircraft.getLocationX(),
+                                                enemyAircraft.getLocationY(),
+                                                0,
+                                                enemyAircraft.getSpeedY() / 2 + 1
+                                        )
+                                );
+                            } else if (flag < 6) {
+                                allSupply.add(
+                                        new FireSupply(
+                                                enemyAircraft.getLocationX(),
+                                                enemyAircraft.getLocationY(),
+                                                0,
+                                                enemyAircraft.getSpeedY() / 2 + 1
+                                        )
+                                );
+                            } else if (flag < 9) {
+                                allSupply.add(
+                                        new BombSupply(
+                                                enemyAircraft.getLocationX(),
+                                                enemyAircraft.getLocationY(),
+                                                0,
+                                                enemyAircraft.getSpeedY() / 2 + 1
+                                        )
+                                );
                             }
+                            score += 40;
                         }
                         score += 10;
                     }
